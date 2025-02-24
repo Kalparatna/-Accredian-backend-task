@@ -9,7 +9,7 @@ const app = express();
 // ✅ Fix: Secure CORS Configuration (No Duplicate Import)
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://accredian-frontend-task-roan-nine.vercel.app"],
+    origin: ["*"],
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,  // ✅ Allow credentials like cookies if needed
