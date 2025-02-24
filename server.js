@@ -7,14 +7,12 @@ const nodemailer = require("nodemailer");
 const app = express();
 
 // ✅ Secure CORS Configuration
-const allowedOrigins = [
-  "http://localhost:5173", // Local development frontend
-  "https://your-frontend-domain.vercel.app", // Deployed frontend domain
-];
-
 app.use(
   cors({
-    origin: allowedOrigins, // Restrict to trusted domains
+    origin: [
+      "http://localhost:5173", // Local development frontend
+      "https://your-frontend-domain.vercel.app", // Deployed frontend domain
+    ], // Restrict to trusted domains
     methods: ["GET", "POST"], // Allowed HTTP methods
     allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
   })
