@@ -6,9 +6,7 @@ const nodemailer = require("nodemailer");
 
 const app = express();
 
-// ✅ Secure CORS Configuration
-const cors = require("cors");
-
+// ✅ Fix: Secure CORS Configuration (No Duplicate Import)
 app.use(
   cors({
     origin: ["http://localhost:5173", "https://accredian-frontend-task-roan-nine.vercel.app"],
@@ -18,6 +16,8 @@ app.use(
   })
 );
 
+// ✅ Fix: Enable Preflight Requests (OPTIONS method)
+app.options("*", cors());
 
 app.use(express.json());
 
@@ -30,6 +30,13 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
+});
+
+// ✅ Fix: Add Debugging Logs for CORS Issues
+app.use((req, res, next) => {
+  console.log("Incoming Request:", req.method, req.path);
+  console.log("Headers:", req.headers);
+  next();
 });
 
 // API to handle referrals
@@ -55,9 +62,10 @@ app.post("/api/referrals", async (req, res) => {
 
     res.status(201).json(newReferral);
   } catch (error) {
+    console.error("Referral Error:", error);
     res.status(500).json({ error: "Error saving referral" });
   }
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
