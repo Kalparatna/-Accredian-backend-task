@@ -7,16 +7,17 @@ const nodemailer = require("nodemailer");
 const app = express();
 
 // ✅ Secure CORS Configuration
+const cors = require("cors");
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173", // Local development frontend
-      "https://accredian-frontend-task-roan-nine.vercel.app/", // Deployed frontend domain
-    ], // Restrict to trusted domains
-    methods: ["GET", "POST"], // Allowed HTTP methods
-    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+    origin: ["http://localhost:5173", "https://accredian-frontend-task-roan-nine.vercel.app"],
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,  // ✅ Allow credentials like cookies if needed
   })
 );
+
 
 app.use(express.json());
 
