@@ -67,5 +67,16 @@ app.post("/api/referrals", async (req, res) => {
   }
 });
 
+app.get("/test-db", async (req, res) => {
+  try {
+    await prisma.$connect();
+    res.status(200).send("✅ Database connected!");
+  } catch (error) {
+    console.error("❌ Database connection error:", error);
+    res.status(500).send("Database connection failed.");
+  }
+});
+
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
