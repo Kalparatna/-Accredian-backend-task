@@ -11,7 +11,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173", // Local development frontend
-      "https://your-frontend-domain.vercel.app", // Deployed frontend domain
+      "https://accredian-frontend-task-roan-nine.vercel.app/", // Deployed frontend domain
     ], // Restrict to trusted domains
     methods: ["GET", "POST"], // Allowed HTTP methods
     allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
